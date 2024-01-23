@@ -15,6 +15,13 @@ static const float urgentcolor[]           = COLOR(0xff0000ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
 
+enum {
+	VIEW_L = -1,
+	VIEW_R = 1,
+	SHIFT_L = -2,
+	SHIFT_R = 2
+} RotateTags;
+
 /* tagging - TAGCOUNT must be no greater than 31 */
 #define TAGCOUNT (9)
 
@@ -132,6 +139,12 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
+	{ MODKEY,                    XKB_KEY_Left,       rotatetags,     {.i = VIEW_L}},
+	{ MODKEY,                    XKB_KEY_Right,      rotatetags,     {.i = VIEW_R}},
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Left,       rotatetags,     {.i = VIEW_L}},
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Right,      rotatetags,     {.i = VIEW_R}},
+	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_Left,       rotatetags,     {.i = SHIFT_L}},
+	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_Right,      rotatetags,     {.i = SHIFT_R}},
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,          setmfact,       {.f = +0.05f} },
 	{ MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
