@@ -161,6 +161,8 @@ static const char *nextcmd[] = { "playerctl", "next", NULL };
 static const char *prevcmd[] = { "playerctl", "previous", NULL };
 static const char *lwlfcmd[] = { "librewolf", NULL };
 
+#include "shiftview.c"
+
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
@@ -172,8 +174,8 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_Left,       rotatetags,     {.i = VIEW_L}},
 	{ MODKEY,                    XKB_KEY_Right,      rotatetags,     {.i = VIEW_R}},
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Left,       rotatetags,     {.i = VIEW_L}},
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Right,      rotatetags,     {.i = VIEW_R}},
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Left,       shiftview,      {.i = -1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Right,      shiftview,      {.i = +1} },
 	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_Left,       rotatetags,     {.i = SHIFT_L}},
 	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_Right,      rotatetags,     {.i = SHIFT_R}},
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },
