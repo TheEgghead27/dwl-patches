@@ -147,8 +147,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "wmenu-run", NULL };
-static const char *britcmd[] = { "doas", "/bin/brightnessctl", "s", "+1%", NULL };
-static const char *darkcmd[] = { "doas", "/bin/brightnessctl", "s", "1%-", NULL };
+static const char *britcmd[] = { "brillo", "-A", "1", NULL };
+static const char *darkcmd[] = { "brillo", "-U", "1", NULL };
 static const char *volUcmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
 static const char *volDcmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
 static const char *mutecmd[] = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
