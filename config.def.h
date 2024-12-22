@@ -33,8 +33,15 @@ static int log_level = WLR_ERROR;
 
 /* Autostart */
 static const char *const autostart[] = {
-        "swww-daemon", NULL,
-        "start-pipewire", NULL,
+	"swww-daemon", NULL,
+	/*
+	"/usr/bin/pipewire", NULL,
+	"/usr/bin/pipewire-pulse", NULL,
+	"/usr/bin/wireplumber", NULL,
+	*/
+	"sh", "-c", "pipewire & pipewire-pulse & wireplumber & waybar &> /tmp/waybar.log", NULL,
+	"hypridle", NULL,
+	"wlsunset", "-l", "40.7", "-L", "-74", NULL,
         NULL /* terminate */
 };
 
@@ -140,6 +147,11 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "wmenu-run", NULL };
+static const char *britcmd[] = { "doas", "/bin/brightnessctl", "s", "+1%", NULL };
+static const char *darkcmd[] = { "doas", "/bin/brightnessctl", "s", "1%-", NULL };
+static const char *volUcmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
+static const char *volDcmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
+static const char *mutecmd[] = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -185,6 +197,12 @@ static const Key keys[] = {
 	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),
 	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          quit,           {0} },
+
+	{ 0, XKB_KEY_XF86MonBrightnessUp,                spawn,          {.v = britcmd} },
+	{ 0, XKB_KEY_XF86MonBrightnessDown,              spawn,          {.v = darkcmd} },
+	{ 0, XKB_KEY_XF86AudioRaiseVolume,               spawn,          {.v = volUcmd} },
+	{ 0, XKB_KEY_XF86AudioLowerVolume,               spawn,          {.v = volDcmd} },
+	{ 0, XKB_KEY_XF86AudioMute,                      spawn,          {.v = mutecmd} },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
