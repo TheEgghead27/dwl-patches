@@ -45,6 +45,10 @@ static const char *const autostart[] = {
         NULL /* terminate */
 };
 
+static const Env envs[] = {
+	/* variable			value */
+	{ "PATH",	"/home/egg/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl" },
+};
 
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
 static const Rule rules[] = {
