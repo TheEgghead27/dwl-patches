@@ -156,6 +156,10 @@ static const char *darkcmd[] = { "brillo", "-U", "1", NULL };
 static const char *volUcmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
 static const char *volDcmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
 static const char *mutecmd[] = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
+static const char *playcmd[] = { "playerctl", "play-pause", NULL };
+static const char *nextcmd[] = { "playerctl", "next", NULL };
+static const char *prevcmd[] = { "playerctl", "previous", NULL };
+static const char *lwlfcmd[] = { "librewolf", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -207,6 +211,10 @@ static const Key keys[] = {
 	{ 0, XKB_KEY_XF86AudioRaiseVolume,               spawn,          {.v = volUcmd} },
 	{ 0, XKB_KEY_XF86AudioLowerVolume,               spawn,          {.v = volDcmd} },
 	{ 0, XKB_KEY_XF86AudioMute,                      spawn,          {.v = mutecmd} },
+	{ 0, XKB_KEY_XF86AudioPlay,                      spawn,          {.v = playcmd} },
+	{ 0, XKB_KEY_XF86AudioPrev,                      spawn,          {.v = prevcmd} },
+	{ 0, XKB_KEY_XF86AudioNext,                      spawn,          {.v = nextcmd} },
+	{ 0, XKB_KEY_XF86Launch2,                        spawn,          {.v = lwlfcmd} },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
